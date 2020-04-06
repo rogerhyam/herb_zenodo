@@ -1,0 +1,137 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "0c7ad398b9a7900294c7a4bc5ad0860c",
+    "packages": [
+        {
+            "name": "daniel-km/zoomify",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Daniel-KM/LibraryZoomify.git",
+                "reference": "233c888b04fbb825d85bc927bb7586779aa6268b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Daniel-KM/LibraryZoomify/zipball/233c888b04fbb825d85bc927bb7586779aa6268b",
+                "reference": "233c888b04fbb825d85bc927bb7586779aa6268b",
+                "shasum": ""
+            },
+            "require": {
+                "lsolesen/pel": "^0.9.6",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DanielKm\\Zoomify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Berthereau",
+                    "email": "daniel.packagist@berthereau.net",
+                    "homepage": "http://www.daniel.berthereau.net"
+                },
+                {
+                    "name": "Adam Smith",
+                    "email": "asmith@agile-software.com"
+                },
+                {
+                    "name": "Wes Wright",
+                    "homepage": "http://greengaloshes.cc"
+                },
+                {
+                    "name": "Justin Henry",
+                    "homepage": "http://greengaloshes.cc"
+                }
+            ],
+            "description": "Stand-alone zoomify tile generator (format Zoomify) for use with OpenSeadragon, OpenLayers and various viewers.",
+            "keywords": [
+                "ImageMagick",
+                "OpenLayers",
+                "gd",
+                "image",
+                "imagick",
+                "openseadragon",
+                "stand-alone",
+                "tiled",
+                "zoom",
+                "zoomable",
+                "zoomify"
+            ],
+            "time": "2019-06-23T22:00:00+00:00"
+        },
+        {
+            "name": "lsolesen/pel",
+            "version": "0.9.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pel/pel.git",
+                "reference": "92da891eaeeabbb00bcd09e0cea53796cf9ca967"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pel/pel/zipball/92da891eaeeabbb00bcd09e0cea53796cf9ca967",
+                "reference": "92da891eaeeabbb00bcd09e0cea53796cf9ca967",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "ext-gd": "*",
+                "phpunit/phpunit": ">=4.8.36 <8",
+                "satooshi/php-coveralls": "1.0.*",
+                "squizlabs/php_codesniffer": "^3.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "lsolesen\\pel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Lars Olesen",
+                    "email": "lars@intraface.dk",
+                    "homepage": "http://intraface.dk",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Martin Geisler",
+                    "email": "martin@geisler.net",
+                    "homepage": "http://geisler.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Exif Library. A library for reading and writing Exif headers in JPEG and TIFF images using PHP.",
+            "homepage": "http://pel.github.com/pel/",
+            "keywords": [
+                "exif",
+                "image"
+            ],
+            "time": "2020-02-11T12:05:42+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
