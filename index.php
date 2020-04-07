@@ -36,6 +36,16 @@ An image service is provided to allow the images to served at different resoluti
  </p>
 
 <h2>Status</h2>
+<p>
+<?php
+    if(file_exists('harvest.pid')){
+        $pid = file_get_contents('harvest.pid');
+        echo "<strong> Harvester is running with PID $pid since " . date ("d F Y H:i:s", filemtime('harvest.pid')) . " UTC</strong>";
+    }else{
+        echo "Harvester is inactive.";
+    }
+?>
+</p>
 
 <p>OAI Syncronisation last run: <strong><?php
 echo file_get_contents('oai_from.txt');
