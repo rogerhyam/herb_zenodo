@@ -20,13 +20,29 @@ Clusiaceae=Guttiferae
 Fabaceae=Leguminosae
 Lamiaceae=Labiatae
 Poaceae=Gramineae
-
-
 */
 
 echo "Starting harvest.\n";
 
-$result = $mysqli->query("SELECT zenodo_id FROM oai_changes ORDER BY change_noticed ASC");
+// check if there is another instance running
+if(file_exists('harvest.pid')){
+    $pid = file_get_contents('harvest.pid');
+    echo "harvest.pid exists with process id $pid so stopping now";
+    exit();
+}else{
+    file_put_contents('harvest.pid', getmypid());
+}
+
+$ops = getopt('l:');
+if(isset($ops['l'])){
+    echo "Limit set to: " . $ops['l'] . "\n";
+    $limit = " LIMIT " . $ops['l'];
+}else{
+    echo "Limit not set.\n";
+    $limit = "";
+}
+
+$result = $mysqli->query("SELECT zenodo_id FROM oai_changes ORDER BY change_noticed ASC $limit");
 
 $total_rows = $result->num_rows;
 
@@ -38,11 +54,11 @@ while($row = $result->fetch_assoc()){
     //sleep(1); // zenodo will block us if we go too fast
     $row_count++;
     echo "$row_count of $total_rows\n";
-    if ($row_count > 100) break;
 }
 
-echo "Finished.\n";
+unlink('harvest.pid');
 
+echo "Finished.\n";
 
 // --------- F U N C T I O N S ---------------
 
