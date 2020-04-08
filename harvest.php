@@ -75,6 +75,7 @@ function import_specimen($record_id){
     $url = "https://zenodo.org/api/records/$record_id";
     echo "\tCalling Zenodo with : $url \n";
     $response = file_get_contents($url);
+
     $header = parseHeaders($http_response_header);
     
     if($header['reponse_code'] == '429'){
@@ -117,14 +118,16 @@ function import_specimen($record_id){
         }
 
         echo "\tDownloading {$file->key}.\n";
-        file_put_contents($image_local_path, fopen($file->links->self, 'r'));
+        $image_pointer = fopen($file->links->self, 'r');
         $header = parseHeaders($http_response_header);
-        if($header['reponse_code'] != '200'){
-            echo "\tSomethings not right, didn't get a 200 got a " . $header['reponse_code'] . ".\n";
+        if(!$image_pointer || $header['reponse_code'] != '200'){
+            echo "\tSomething's not right, didn't get a 200 response or got some other error.\n";
             echo "\tMoving on to next one;\n";
             unlink($image_local_path);
             return;
         }
+        file_put_contents($image_local_path, $image_pointer);
+        fclose($image_pointer);
 
         echo "\tGenerating zoomify for {$file->key}.\n";
         $result = $zoomify->process($image_local_path);

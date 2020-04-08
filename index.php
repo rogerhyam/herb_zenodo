@@ -32,7 +32,7 @@ The manifest URIs take the form:
 </p>
 <a href="https://data.herbariamundi.org/iiif/p/10.5281/zenodo.3614905"><code>https://data.herbariamundi.org/iiif/p/10.5281/zenodo.3614905</code></a>
 <p>
-An image service is provided to allow the images to served at different resolutions and zoomed.
+An image service allows the images to be viewed at different resolutions and zoomed.
  </p>
 
 <h2>Status</h2>
@@ -70,6 +70,10 @@ $record_count = exec('find . -type f -name *.jpg -print | wc -l');
 echo number_format($record_count);
 ?></strong></p>
 
+<h2>Support</h2>
+<p>This facility is hosted by the <a href="https://www.rbge.org.uk">Royal Botanic Garden Edinburgh</a>.
+<br/>
+For support please contact <a href="mailto:rhyam@rbge.org.uk">Roger Hyam</a>.</p>
 </div>
 
 
