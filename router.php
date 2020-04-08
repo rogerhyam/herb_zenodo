@@ -37,10 +37,11 @@ if (preg_match('/\/iiif(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
 // handle cetaf id requests
 // https://data.herbariamundi.org/10.5281/zenodo.3614905
 $matches = array();
-if (preg_match('/\/10.5281\/zenodo\.([0-9]+)[.]*(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
+if (preg_match('/\/(10.5281\/zenodo\.([0-9]+)[.]*(.*))/', $_SERVER["REQUEST_URI"], $matches)) {
     
-    $zenodo_id = $matches[1];
-    $format = $matches[2];
+    $zenodo_doi = $matches[1];
+    $zenodo_id = $matches[2];
+    $format = $matches[3];
     
     // we load a file to handle that format
     if(!$format) $format = 'redirect';

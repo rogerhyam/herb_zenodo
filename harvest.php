@@ -118,6 +118,14 @@ function import_specimen($record_id){
 
         echo "\tDownloading {$file->key}.\n";
         file_put_contents($image_local_path, fopen($file->links->self, 'r'));
+        $header = parseHeaders($http_response_header);
+        if($header['reponse_code'] != '200'){
+            echo "\tSomethings not right, didn't get a 200 got a " . $header['reponse_code'] . ".\n";
+            echo "\tMoving on to next one;\n";
+            unlink($image_local_path);
+            return;
+        }
+
         echo "\tGenerating zoomify for {$file->key}.\n";
         $result = $zoomify->process($image_local_path);
         echo "\tDone generating zoomify for {$file->key}.\n";
