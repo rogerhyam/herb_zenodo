@@ -19,7 +19,7 @@ To search for and manipulate specimens please use <a href="https://wwww.herbaria
 
 <h2>CETAF ID</h2>
 <p>It provides CETAF ID compatible semantic web URIs for specimens. These take the form the Zendodo DOI prepended by https://data.herbariamundi.org/ e.g.</p>
-<a href="https://data.herbariamundi.org/10.5281/zenodo.3614905"><code>https://data.herbariamundi.org/10.5281/zenodo.3614905</code></a>
+<a href="https://data.herbariamundi.org/10.5281/zenodo.3617427"><code>https://data.herbariamundi.org/10.5281/zenodo.3617427</code></a>
 
 <p>As per good semantic web practice when these URIs are resolved (a.k.a.dereferenced) a process of content negotiation
 is results in a 303 redirect to either a simple, human readable HTML landing page or an RDF rendition of the data.</p>
@@ -29,7 +29,7 @@ is results in a 303 redirect to either a simple, human readable HTML landing pag
 for each specimen. The manifest contains metadata from the specimen and references the images of the specimen.
 The manifest URIs take the form:
 </p>
-<a href="https://data.herbariamundi.org/iiif/p/10.5281/zenodo.3614905"><code>https://data.herbariamundi.org/iiif/p/10.5281/zenodo.3614905</code></a>
+<a href="https://data.herbariamundi.org/10.5281/zenodo.3617427"><code>https://data.herbariamundi.org/10.5281/zenodo.3617427</code></a>
 <p>
 An image service allows the images to be viewed at different resolutions and zoomed.
  </p>

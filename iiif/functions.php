@@ -17,10 +17,10 @@ function get_cache_path_for_specimen($zenodo_id){
 
 function get_specimen_id(){
 
-    // path looks like this =>  /iiif/i/123/sdfsdfsadf/sadfds/sadfs 
+    // path looks like this =>  /iiif-p/123/sdfsdfsadf/sadfds/sadfs 
     // fixme: needs check
     $matches = array();
-    if(preg_match('/\/iiif\/[i|p]\/([0-9]+)\//',$_SERVER["REQUEST_URI"], $matches)){
+    if(preg_match('/\/iiif-[i|p]\/([0-9]+)\//',$_SERVER["REQUEST_URI"], $matches)){
         return $matches[1];
     }else{
         echo "Bad Request: " . $_SERVER["REQUEST_URI"];
@@ -31,7 +31,7 @@ function get_specimen_id(){
 
 function get_image_path(){
     $matches = array();
-    if(preg_match('/\/iiif\/i\/([^\/]+)\//',$_SERVER["REQUEST_URI"], $matches)){
+    if(preg_match('/\/iiif-i\/([^\/]+)\//',$_SERVER["REQUEST_URI"], $matches)){
         return ZENODO_SPECIMEN_CACHE . base64_decode($matches[1]);
     }else{
         echo "Bad Request: " . $_SERVER["REQUEST_URI"];
@@ -49,17 +49,19 @@ function get_specimen_metadata(){
 
 function get_base_uri(){
 
-    $matches = array();
-    preg_match('/(\/iiif\/[p|i]\/[^\/]+)\//',$_SERVER["REQUEST_URI"], $matches);
-
-    $base_uri = PROTOCOL_HOST_PORT_WWW . $matches[1];
+	$matches = array();
+    preg_match('/(\/iiif-[p|i]\/[^\/]+)/',$_SERVER["REQUEST_URI"], $matches);
+	$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+    $base_uri = $protocol . $_SERVER['HTTP_HOST'] . $matches[1] . '/';
 
     return $base_uri;
 }
 
 function get_image_uri($specimen_id, $file_data){
 	$path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3/', str_pad($specimen_id, 12, '0', STR_PAD_LEFT));
-    $image_uri = PROTOCOL_HOST_PORT_WWW . '/iiif/i/' . base64_encode($path . pathinfo($file_data->key, PATHINFO_FILENAME) . '_zdata');
+	$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+    
+	$image_uri = $protocol . $_SERVER['HTTP_HOST'] . '/iiif-i/' . base64_encode($path . pathinfo($file_data->key, PATHINFO_FILENAME) . '_zdata');
     return $image_uri;
 }
 

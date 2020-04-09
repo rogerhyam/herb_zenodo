@@ -87,7 +87,7 @@ foreach($metadata->files as $file_data){
 $json = json_encode( $out, JSON_PRETTY_PRINT + JSON_UNESCAPED_SLASHES );
 // total hack to add the @ to the context attribute (not acceptable in php)
 $json = str_replace('"context":','"@context":', $json);
-//header('Content-Type: application/json');
+header('Content-Type: application/json');
 echo $json;
 
 ?>

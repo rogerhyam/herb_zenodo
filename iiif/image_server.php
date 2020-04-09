@@ -2,12 +2,13 @@
 
 require_once('functions.php');
 
-// e.g. http://localhost:3100/iiif/i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/region/size/rotation/quality.format
+
+// e.g. http://localhost:3100/iiif-i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/region/size/rotation/quality.format
 
 // parse out that path describing the image request
 // from api => {scheme}://{server}{/prefix}/{identifier}/{region}/{size}/{rotation}/{quality}.{format}
 $matches = array();
-if(!preg_match('/\/iiif\/i\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\.]+)\.([a-z]+)$/',$_SERVER["REQUEST_URI"], $matches)){
+if(!preg_match('/\/iiif-i\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\.]+)\.([a-z]+)$/',$_SERVER["REQUEST_URI"], $matches)){
     throw_badness('Invalid image URI' . $_SERVER["REQUEST_URI"]);
 }else{
     list($path, $identifier, $region, $size, $rotation, $quality, $format) = $matches;

@@ -5,4 +5,4 @@ RewriteRule ^iiif\/.*  /router.php [END]
 
 # calls to the cetaf_id signature
 # like this  https://data.herbariamundi.org/10.5281/zenodo.3613804
-RewriteRule ^(10\.[0-9]+/zenodo\.[0-9]+)$ /router.php [END]
+RewriteRule ^(10\.[0-9]+/zenodo\.[0-9]+) /router.php [END]

@@ -15,20 +15,55 @@ if (preg_match('/\/iiif(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
     $iiif_path = $matches[1];
 
     // looking for presenation api services
-    if(preg_match('/^\/p\//', $iiif_path)){
-        require_once('iiif/presentation_manifest.php');
+    if(preg_match('/^-p\//', $iiif_path)){
+
+        // if it doesn't end in manifest redirect them to the manifest
+        if(preg_match('/\/manifest$/', $iiif_path)){
+            require_once('iiif/presentation_manifest.php');
+        }else{
+            $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+            $man_uri = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+            if(preg_match('/\/$/', $man_uri)){
+                $man_uri .= 'manifest';
+            }else{
+                $man_uri .= '/manifest';
+            }
+            header("HTTP/1.1 303 See Other");
+            header("Location: $man_uri");   
+        }
+
+        return true;
     }
 
     // looking for image api services
-    if(preg_match('/^\/i\//', $iiif_path)){
+    if(preg_match('/^-i\//', $iiif_path)){
 
         if(preg_match('/info.json$/', $iiif_path)){
+            // they want the image info
             require_once('iiif/image_info.php');
-        }else{
+        }elseif(preg_match('/\.jpg$/', $iiif_path)){
+            // they are asking for a jpeg
             require_once('iiif/image_server.php');
+        }else{
+            // Don't know what they want.
+            // redirect to the json
+            $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+            $info_uri = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
+            if(preg_match('/\/$/', $info_uri)){
+                $info_uri .= 'info.json';
+            }else{
+                $info_uri .= '/info.json';
+            }
+            header("HTTP/1.1 303 See Other");
+            header("Location: $info_uri");     
         }
 
+        return true;
+
     }
+
+    // not defined presentation or image API so display welcome page.
+    require_once('iiif/welcome.php');
 
     // end routing
     return true;
@@ -52,22 +87,9 @@ if (preg_match('/\/(10.5281\/zenodo\.([0-9]+)[.]*(.*))/', $_SERVER["REQUEST_URI"
         header("HTTP/1.1 404 Not Found");
         echo "Format not found";
     }
-
-
     
     return true;
 }
-
-
-// handle CETAF requests
-$matches = array();
-if (preg_match('/\/cetaf(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
-    echo "cetaf\n";
-    echo $matches[1];
-    return true;
-}
-
-// 
 
 // no matches so continue with nothing
 // only in dev this happens
