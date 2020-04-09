@@ -4,7 +4,6 @@
 <html>
 <head>
     <title>Herb Zenodo</title>
-
 </head>
 <body>
 <div style="max-width: 40rem; margin: 1rem; padding: 1rem; border: solid gray 1px;">

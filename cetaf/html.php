@@ -6,8 +6,6 @@
     $cache_url = '/' . $cache_dir;
     $record_json = file_get_contents($cache_dir . 'zenodo_record.json');
     $record = json_decode($record_json);
-
-    //echo 'HTML Rendering of ' . $zenodo_id;
 ?>
 <html>
 <head>
@@ -48,7 +46,6 @@ FIXME IIIF to get thumbs of these
 <h3>Description in Zenodo</h3>
 <?php echo $record->metadata->description ?>
 <hr/>
-
 
 <pre>
 <?php
