@@ -20,7 +20,7 @@ if (preg_match('/\/iiif(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
         if(preg_match('/\/manifest$/', $iiif_path)){
             require_once('iiif/presentation_manifest.php');
         }else{
-            $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+            $protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
             $man_uri = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
             if(preg_match('/\/$/', $man_uri)){
                 $man_uri .= 'manifest';
@@ -46,7 +46,7 @@ if (preg_match('/\/iiif(.*)/', $_SERVER["REQUEST_URI"], $matches)) {
         }else{
             // Don't know what they want.
             // redirect to the json
-            $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+            $protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
             $info_uri = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
             if(preg_match('/\/$/', $info_uri)){
                 $info_uri .= 'info.json';

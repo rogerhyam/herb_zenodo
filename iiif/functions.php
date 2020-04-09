@@ -51,7 +51,7 @@ function get_base_uri(){
 
 	$matches = array();
     preg_match('/(\/iiif-[p|i]\/[^\/]+)/',$_SERVER["REQUEST_URI"], $matches);
-	$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+	$protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
     $base_uri = $protocol . $_SERVER['HTTP_HOST'] . $matches[1] . '/';
 
     return $base_uri;
@@ -59,7 +59,7 @@ function get_base_uri(){
 
 function get_image_uri($specimen_id, $file_data){
 	$path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3/', str_pad($specimen_id, 12, '0', STR_PAD_LEFT));
-	$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+	$protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
     
 	$image_uri = $protocol . $_SERVER['HTTP_HOST'] . '/iiif-i/' . base64_encode($path . pathinfo($file_data->key, PATHINFO_FILENAME) . '_zdata');
     return $image_uri;

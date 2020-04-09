@@ -13,6 +13,7 @@
     <link rel="meta" type="application/rdf+xml" href="/10.5281/zenodo.<?php echo $zenodo_id ?>/rdf" />
 </head>
 <body>
+
 <div style="max-width: 40rem; margin: 1rem; padding: 1rem; border: solid gray 1px;">
 <a href="/"><h1>Herb Zenodo</h1></a>
 <hr/>
