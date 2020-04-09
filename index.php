@@ -29,7 +29,7 @@ is results in a 303 redirect to either a simple, human readable HTML landing pag
 for each specimen. The manifest contains metadata from the specimen and references the images of the specimen.
 The manifest URIs take the form:
 </p>
-<a href="https://data.herbariamundi.org/10.5281/zenodo.3617427"><code>https://data.herbariamundi.org/10.5281/zenodo.3617427</code></a>
+<a href="https://data.herbariamundi.org/iiif-p/3614905/manifest"><code>https://data.herbariamundi.org/iiif-p/3614905/manifest</code></a>
 <p>
 An image service allows the images to be viewed at different resolutions and zoomed.
  </p>

@@ -8,7 +8,6 @@ require_once('config.php');
     //10.5281/zenodo.  ...
 */
 
-
 // handling /iiif
 $matches = array();
 if (preg_match('/\/iiif(.*)/', $_SERVER["REQUEST_URI"], $matches)) {

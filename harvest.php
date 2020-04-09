@@ -96,7 +96,7 @@ function import_specimen($record_id){
     // https://data.herbariamundi.org/10.5281/zenodo.3588258
 
     // check dir exists
-    if(!file_exists($dir_path)) mkdir($dir_path, 0777, true);
+    if(!file_exists($dir_path)) mkdir($dir_path, 0777, true); // FIXME: This doesn't give www-data write access it needs?
 
     // write the data record there
     // overwriting the last one if it was there

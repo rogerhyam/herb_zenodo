@@ -24,20 +24,20 @@
     <a href="<?php echo $record->links->conceptdoi ?>">Zenodo</a> - The original, archived data.
     <a href="<?php echo $record->links->conceptdoi ?>"><img style="vertical-align: middle;" src="<?php echo $record->links->conceptbadge ?>"/></a> 
     </li>
-    <li><a href="/iiif/p/<?php echo $record->conceptdoi ?>/manifest">IIIF Manifest</a> - for loading into any IIIF viewer.</li>
+    <li><a href="/iiif-p/<?php echo $zenodo_id ?>/manifest">IIIF Manifest</a> - for loading into any IIIF viewer.</li>
 </ul>
 <hr/>
 <h3>Images</h3>
-FIXME IIIF to get thumbs of these
 <?php
 
     foreach($record->files as $file){
         if($file->type != 'jpg') continue;
-        echo "<ul>";
-        echo "<li>$file->key</li>";
-        echo "<li><a href=\"$cache_url$file->key\">Download cached version.</a></li>";
-        echo "<li><a href=\"{$file->links->self}\">Download from Zenodo.</a></li>";
-        echo "</ul>";
+        $image_thumb_uri = get_image_uri($zenodo_id, $file)  . "/full/,200/0/default.jpg";
+        echo "<div style=\"overflow: auto;\">";
+        echo "<img src=\"$image_thumb_uri\" style=\"float: left; padding:1em;\"/>";
+        echo "<p><a href=\"$cache_url$file->key\">Download cached version.</a></p>";
+        echo "<p><a href=\"{$file->links->self}\">Download from Zenodo.</a></p>";
+        echo "</div>";
     }
 
 ?>
