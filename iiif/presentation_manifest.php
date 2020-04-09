@@ -8,7 +8,7 @@ $metadata = get_specimen_metadata();
 
 $out = new stdClass();
 $out->context = array("http://www.w3.org/ns/anno.jsonld","http://iiif.io/api/presentation/3/context.json");
-$out->id = $base_uri . "manifest";
+$out->id = $base_uri . "/manifest";
 $out->type = "Manifest";
 $out->label = create_label( $metadata->metadata->title);
 

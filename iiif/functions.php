@@ -52,7 +52,7 @@ function get_base_uri(){
 	$matches = array();
     preg_match('/(\/iiif-[p|i]\/[^\/]+)/',$_SERVER["REQUEST_URI"], $matches);
 	$protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
-    $base_uri = $protocol . $_SERVER['HTTP_HOST'] . $matches[1] . '/';
+    $base_uri = $protocol . $_SERVER['HTTP_HOST'] . $matches[1];
 
     return $base_uri;
 }
