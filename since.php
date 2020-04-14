@@ -14,7 +14,7 @@ $out['days_back'] = $days_back;
 $out['request_time'] = date('c');
 
 $files = array();
-$command = "find cache -mtime -{$days_back} -d 4 -name zenodo_record.json -print";
+$command = "find cache -mtime -{$days_back} -maxdepth 4 -name zenodo_record.json -print";
 $out['command'] = $command; 
 exec($command, $files);
 
