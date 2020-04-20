@@ -18,7 +18,6 @@ function get_cache_path_for_specimen($zenodo_id){
 function get_specimen_id(){
 
     // path looks like this =>  /iiif-p/123/sdfsdfsadf/sadfds/sadfs 
-    // fixme: needs check
     $matches = array();
     if(preg_match('/\/iiif-[i|p]\/([0-9]+)\//',$_SERVER["REQUEST_URI"], $matches)){
         return $matches[1];
