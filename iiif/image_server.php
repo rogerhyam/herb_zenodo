@@ -18,14 +18,15 @@ if(!preg_match('/\/iiif-i\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\.]+)\.([a
 if($rotation != '0') throw_badness('Rotation other than 0 is not supported.');
 if($quality != 'default') throw_badness('Only default quality is supported.');
 
-$file_path_full = get_image_path();
+$image_props = get_image_properties();
+
+$file_path_full = $image_props['image_path'];
+$zoom_path = $image_props['zoom_path'];
 
 // do we even have that file?
-if(!file_exists($file_path_full)){
+if(!$image_props){
 	throw_badness('Image does not exist.');
 }
-
-$image_props = get_image_properties();
 
 // the size is the actual dimensions of the image to be returned
 $size = explode(',', $size);
@@ -89,7 +90,7 @@ $zoomify_row = round(($region_y / $scale_factor) / 256);
 // we can get the magnification by comaring the width of the region with the width of the size asked for 
 $tile_group = get_tile_group($image_props['zoomify_layers'], $zoomify_layer, $zoomify_col, $zoomify_row);
 // example $uri = "http://data.rbge.org.uk/search/herbarium/scripts/getzoom3.php?path=$barcode.zip;file:/ImageProperties.xml&noCacheSfx=1544716865761";
-$url = "$file_path_full/TileGroup$tile_group/$zoomify_layer-$zoomify_col-$zoomify_row.jpg";
+$url = "$zoom_path/TileGroup$tile_group/$zoomify_layer-$zoomify_col-$zoomify_row.jpg";
 header('Content-Type: image/jpeg');
 readfile($url);
 

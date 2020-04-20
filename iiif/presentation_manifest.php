@@ -40,11 +40,11 @@ foreach($metadata->files as $file_data){
 
     $image_name = pathinfo($file_data->key, PATHINFO_FILENAME);
     $path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3/', str_pad($specimen_id, 12, '0', STR_PAD_LEFT));
-    $image_path = ZENODO_SPECIMEN_CACHE . $path  . $image_name . '_zdata';
+   // $image_path = ZENODO_SPECIMEN_CACHE . $path  . $image_name . '_zdata';
 
     $canvas_base_uri = "$base_uri#$image_name";
     $image_base_uri = get_image_uri($specimen_id, $file_data);
-    $props = get_image_properties(  $image_path );
+    $props = get_image_properties();
 
     $canvas = new stdClass();
     $out->items = array($canvas);

@@ -2,11 +2,7 @@
 
 /*
 
-    image identifiers are of the form base64_encode(specimen_record_number/filename_without_jpg)
-    e.g. '3588258/TOLI-22749-EST-01-4-A1-104'
-    becomes:    MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==
-    http://localhost:3100/iiif-i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/info.json
-
+   
 */
 
 function get_cache_path_for_specimen($zenodo_id){
@@ -29,13 +25,9 @@ function get_specimen_id(){
 }
 
 function get_image_path(){
-    $matches = array();
-    if(preg_match('/\/iiif-i\/([^\/]+)\//',$_SERVER["REQUEST_URI"], $matches)){
-        return ZENODO_SPECIMEN_CACHE . base64_decode($matches[1]);
-    }else{
-        echo "Bad Request: " . $_SERVER["REQUEST_URI"];
-        return false;
-    }
+		$path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3', str_pad(get_specimen_id(), 12, '0', STR_PAD_LEFT));
+		$dir_path = ZENODO_SPECIMEN_CACHE . $path;
+		return $dir_path;
 }
 
 function get_specimen_metadata(){
@@ -50,30 +42,36 @@ function get_base_uri(){
 
 	$matches = array();
     preg_match('/(\/iiif-[p|i]\/[^\/]+)/',$_SERVER["REQUEST_URI"], $matches);
-	$protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
+	$protocol = @$_SERVER['HTTPS'] ? 'https://' : 'http://';
     $base_uri = $protocol . $_SERVER['HTTP_HOST'] . $matches[1];
 
     return $base_uri;
 }
 
 function get_image_uri($specimen_id, $file_data){
-	$path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3/', str_pad($specimen_id, 12, '0', STR_PAD_LEFT));
-	$protocol = $_SERVER['HTTPS'] ? 'https://' : 'http://';
-    
-	$image_uri = $protocol . $_SERVER['HTTP_HOST'] . '/iiif-i/' . base64_encode($path . pathinfo($file_data->key, PATHINFO_FILENAME) . '_zdata');
+	//$path = preg_replace('/^([0-9]{4})([0-9]{4})([0-9]{4})/', '$1/$2/$3/', str_pad($specimen_id, 12, '0', STR_PAD_LEFT));
+	
+	$protocol = @$_SERVER['HTTPS'] ? 'https://' : 'http://';
+	$image_uri = $protocol . $_SERVER['HTTP_HOST'] . '/iiif-i/' . $specimen_id;
     return $image_uri;
 }
 
 
-function get_image_properties($image_path = false){
+function get_image_properties(){
 
-    if(!$image_path) $image_path = get_image_path();
+	$out = array();
 
-	$xml_string = file_get_contents($image_path . '/ImageProperties.xml');
+	$image_path = get_image_path();
+
+	$zoom_dirs = glob($image_path .'/*_zdata', GLOB_ONLYDIR);
+	$zoom_path = $zoom_dirs[0]; 
+
+	$xml_string = file_get_contents($zoom_path . '/ImageProperties.xml');
 	
 	$xml=simplexml_load_string($xml_string);
 	
-	$out = array();
+	$out['image_path'] = $image_path;
+	$out['zoom_path'] = $zoom_path;
 	$out['is_tile_pyramid'] = true;
 	$out['width'] = (int)$xml['WIDTH'];
 	$out['height'] = (int)$xml['HEIGHT'];
@@ -146,7 +144,7 @@ function get_full_image($file_path_full, $level, $image_props){
 	
 		for ($j=0; $j < $layer['cols']; $j++) {		
 			$tile_group = get_tile_group($layers, $level, $j, $i);
-			$uri = "$file_path_full/TileGroup$tile_group/$level-$j-$i.jpg";
+			$uri = $image_props['zoom_path'] . "/TileGroup$tile_group/$level-$j-$i.jpg";
 			$row->addImage(new Imagick($uri));
 		}
 	
