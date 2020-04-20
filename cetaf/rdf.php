@@ -10,7 +10,7 @@
     $cache_url = '/' . $cache_dir;
     $record_json = file_get_contents($cache_dir . 'zenodo_record.json');
     $record = json_decode($record_json);
-    $cetaf_id = "https://data.herbariamundi.org/" . $record->conceptdoi;
+    $cetaf_id = "https://data.herbariamundi.org/" . $record->doi;
 
 ?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -59,8 +59,8 @@
     <dc:type>Specimen</dc:type>
     <dwc:institutionCode>Zenodo</dwc:institutionCode>
     <dwc:collectionCode>Zenodo</dwc:collectionCode>
-    <dwc:catalogNumber><?php echo $record->conceptdoi ?></dwc:catalogNumber>
-    <dwc:recordNumber><?php echo $record->conceptrecid ?></dwc:recordNumber>
+    <dwc:catalogNumber><?php echo $record->doi ?></dwc:catalogNumber>
+    <dwc:recordNumber><?php echo $record->id ?></dwc:recordNumber>
     <dwc:recordedBy><?php echo implode('; ',$recorded_by ) ?></dwc:recordedBy>
 
     <?php
@@ -108,7 +108,7 @@
         if($file->type != 'jpg') continue;
 
         // url to full size image through iiif server
-        $image_url = "https://data.herbariamundi.org/iiif/i/" . $record->conceptdoi . "/full/max/0/default.jpg";
+        $image_url = "https://data.herbariamundi.org/iiif/i/" . $record->doi . "/full/max/0/default.jpg";
 ?>
     <dwc:associatedMedia rdf:resource="<?php echo $image_url ?>" />
     <dc:relation>
@@ -126,7 +126,7 @@
 
 	<!-- IIIF resources associated with the specimen -->
 <?php
-    $manifest_uri = "https://data.herbariamundi.org/iiif/i/" . $record->conceptdoi . "/manifest";
+    $manifest_uri = "https://data.herbariamundi.org/iiif/i/" . $record->doi . "/manifest";
 ?>
     <dc:relation>
 	<rdf:Description  rdf:about="<?php echo $manifest_uri ?>" >

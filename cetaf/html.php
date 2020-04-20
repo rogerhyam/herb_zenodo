@@ -50,7 +50,7 @@
 
 <pre>
 <?php
-   // print_r($record);
+   print_r($record);
 ?>
 </pre>
 </div>
