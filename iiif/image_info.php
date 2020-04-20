@@ -1,6 +1,6 @@
 <?php
 
-// e.g. http://localhost:3100/iiif/i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/info.json
+// e.g. http://localhost:3100/iiif-i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/info.json
 
 require_once('functions.php');
 

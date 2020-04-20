@@ -5,7 +5,7 @@
     image identifiers are of the form base64_encode(specimen_record_number/filename_without_jpg)
     e.g. '3588258/TOLI-22749-EST-01-4-A1-104'
     becomes:    MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==
-    http://localhost:3100/iiif/i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/info.json
+    http://localhost:3100/iiif-i/MzU4ODI1OC9UT0xJLTIyNzQ5LUVTVC0wMS00LUExLTEwNA==/info.json
 
 */
 

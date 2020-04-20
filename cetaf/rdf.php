@@ -108,7 +108,7 @@
         if($file->type != 'jpg') continue;
 
         // url to full size image through iiif server
-        $image_url = "https://data.herbariamundi.org/iiif/i/" . $record->doi . "/full/max/0/default.jpg";
+        $image_url = "https://data.herbariamundi.org/iiif-i/" . $record->doi . "/full/max/0/default.jpg";
 ?>
     <dwc:associatedMedia rdf:resource="<?php echo $image_url ?>" />
     <dc:relation>
@@ -126,7 +126,7 @@
 
 	<!-- IIIF resources associated with the specimen -->
 <?php
-    $manifest_uri = "https://data.herbariamundi.org/iiif/i/" . $record->doi . "/manifest";
+    $manifest_uri = "https://data.herbariamundi.org/iiif-i/" . $record->doi . "/manifest";
 ?>
     <dc:relation>
 	<rdf:Description  rdf:about="<?php echo $manifest_uri ?>" >
