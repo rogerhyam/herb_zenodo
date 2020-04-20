@@ -20,10 +20,10 @@
 <h2><?php echo $record->metadata->title ?></h2>
 <p>This specimen is better viewed using one of these links:</p>
 <ul>
-    <li><a href="https://www.herbariamundi.org/#<?php echo $record->conceptdoi ?>">Herbaria Mundi</a> - an environment for sharing and browsing herbarium specimen images.</li>
+    <li><a href="https://www.herbariamundi.org/#<?php echo $record->doi ?>">Herbaria Mundi</a> - an environment for sharing and browsing herbarium specimen images.</li>
     <li>
-    <a href="<?php echo $record->links->conceptdoi ?>">Zenodo</a> - The original, archived data.
-    <a href="<?php echo $record->links->conceptdoi ?>"><img style="vertical-align: middle;" src="<?php echo $record->links->conceptbadge ?>"/></a> 
+    <a href="<?php echo $record->links->doi ?>">Zenodo</a> - The original, archived data.
+    <a href="<?php echo $record->links->doi ?>"><img style="vertical-align: middle;" src="<?php echo $record->links->badge ?>"/></a> 
     </li>
     <li><a href="/iiif-p/<?php echo $zenodo_id ?>/manifest">IIIF Manifest</a> - for loading into any IIIF viewer.</li>
 </ul>
@@ -50,7 +50,7 @@
 
 <pre>
 <?php
-   print_r($record);
+  // print_r($record);
 ?>
 </pre>
 </div>

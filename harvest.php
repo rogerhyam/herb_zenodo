@@ -91,8 +91,6 @@ function import_specimen($record_id){
 
     $zenodo = json_decode($response);
 
-    // here on in we deal with concept IDs and record IDs so we can track versions
-    // The specimen ID is the concept ID. That is what we use in the CETAF_ID
     // https://data.herbariamundi.org/10.5281/zenodo.3588258
 
     // check dir exists
