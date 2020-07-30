@@ -35,7 +35,7 @@
 <rdf:Description rdf:about="<?php echo $cetaf_id; ?>">
     <!-- Assertions made in simple Dublin Core -->
     <dc:publisher rdf:resource="https://data.herbariamundi.org" />
-    <dc:title><?php echo $record->metadata->title ?></dc:title>
+    <dc:title><?php echo htmlspecialchars( $record->metadata->title  )?></dc:title>
     <dc:description><![CDATA[
         <?php echo $record->metadata->description ?>
     ]]></dc:description>
@@ -59,22 +59,22 @@
     <dc:type>Specimen</dc:type>
     <dwc:institutionCode>Zenodo</dwc:institutionCode>
     <dwc:collectionCode>Zenodo</dwc:collectionCode>
-    <dwc:catalogNumber><?php echo $record->doi ?></dwc:catalogNumber>
-    <dwc:recordNumber><?php echo $record->id ?></dwc:recordNumber>
-    <dwc:recordedBy><?php echo implode('; ',$recorded_by ) ?></dwc:recordedBy>
+    <dwc:catalogNumber><?php echo htmlspecialchars($record->doi) ?></dwc:catalogNumber>
+    <dwc:recordNumber><?php echo htmlspecialchars($record->id) ?></dwc:recordNumber>
+    <dwc:recordedBy><?php echo htmlspecialchars(implode('; ',$recorded_by ))?></dwc:recordedBy>
 
     <?php
         
         // pull the family names out of the title and description
         $families = get_families( $record->metadata->title . ' ' . $record->metadata->description);
         foreach($families as $family){
-            echo "<dwc:family>$family</dwc:family>";
+            echo "<dwc:family>".htmlspecialchars($family)."</dwc:family>";
         }
 
         // pull the genus names out of the title only (description has too many false positives)
         $genera = get_genera( $record->metadata->title );
         foreach($genera as $genus){
-            echo "<dwc:genus>$genus</dwc:genus>";
+            echo "<dwc:genus>".htmlspecialchars($genus)"</dwc:genus>";
         }
 
         // decode the subjects

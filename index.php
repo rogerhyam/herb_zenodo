@@ -63,12 +63,6 @@ $record_count = exec('find . -type f -name zenodo_record.json -print | wc -l');
 echo number_format($record_count);
 ?></strong></p>
 
-<p>Total JPEGS (including tiles) in cached: <strong>
-<?php
-$record_count = exec('find . -type f -name *.jpg -print | wc -l');
-echo number_format($record_count);
-?></strong></p>
-
 <h2>Support</h2>
 <p>This facility is hosted by the <a href="https://www.rbge.org.uk">Royal Botanic Garden Edinburgh</a>.
 <br/>
