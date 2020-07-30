@@ -74,7 +74,7 @@
         // pull the genus names out of the title only (description has too many false positives)
         $genera = get_genera( $record->metadata->title );
         foreach($genera as $genus){
-            echo "<dwc:genus>".htmlspecialchars($genus)"</dwc:genus>";
+            echo "<dwc:genus>".htmlspecialchars($genus). "</dwc:genus>";
         }
 
         // decode the subjects
