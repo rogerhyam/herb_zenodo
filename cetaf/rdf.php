@@ -37,7 +37,11 @@
     <dc:publisher rdf:resource="https://data.herbariamundi.org" />
     <dc:title><?php echo htmlspecialchars( $record->metadata->title  )?></dc:title>
     <dc:description><![CDATA[
-        <?php echo $record->metadata->description ?>
+        <?php 
+            // Who knew you couldn't have ampersands in cdata?
+            $no_amp = str_replace('&', '&amp;', $record->metadata->description);
+            echo  $no_amp;
+        ?>
     ]]></dc:description>
     <?php
     $recorded_by = array();
