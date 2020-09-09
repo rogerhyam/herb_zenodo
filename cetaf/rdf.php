@@ -37,16 +37,13 @@
     <dc:publisher rdf:resource="https://data.herbariamundi.org" />
     <dc:title><?php echo htmlspecialchars( $record->metadata->title  )?></dc:title>
     <dc:description><![CDATA[
-        <?php 
-            // Who knew you couldn't have ampersands in cdata?
-            $no_amp = str_replace('&', '&amp;', $record->metadata->description);
-            echo  $no_amp;
-        ?>
+        <?php echo  $record->metadata->description; ?>
     ]]></dc:description>
     <?php
     $recorded_by = array();
     foreach($record->metadata->creators as $creator){
-        echo "<dc:creator>{$creator->name}</dc:creator>";
+        $c = htmlspecialchars($creator->name);
+        echo "<dc:creator>$c</dc:creator>";
         $recorded_by[] = $creator->name;
     }
 
@@ -126,7 +123,7 @@
     </dc:relation>
 <?php
     }
-?>
+?>ç
 
 	<!-- IIIF resources associated with the specimen -->
 <?php
