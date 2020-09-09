@@ -126,7 +126,7 @@
 
 	<!-- IIIF resources associated with the specimen -->
 <?php
-    $manifest_uri = "https://data.herbariamundi.org/iiif-i/" . $record->id . "/manifest";
+    $manifest_uri = "https://data.herbariamundi.org/iiif-p/" . $record->id . "/manifest";
 ?>
     <dc:relation>
 	<rdf:Description  rdf:about="<?php echo $manifest_uri ?>" >

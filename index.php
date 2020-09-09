@@ -57,11 +57,13 @@ echo file_get_contents('oai_from.txt');
     echo number_format($row['n']);
 ?></strong></p>
 
+<!--
 <p>Specimen records cached: <strong>
 <?php
-$record_count = exec('find . -type f -name zenodo_record.json -print | wc -l');
-echo number_format($record_count);
+//$record_count = exec('find . -type f -name zenodo_record.json -print | wc -l');
+//echo number_format($record_count);
 ?></strong></p>
+-->
 
 <h2>Support</h2>
 <p>This facility is hosted by the <a href="https://www.rbge.org.uk">Royal Botanic Garden Edinburgh</a>.
